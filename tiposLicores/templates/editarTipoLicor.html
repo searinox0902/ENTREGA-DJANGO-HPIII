@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+    <section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
+    <div class="flex flex-col justify-center h-full">
+        
+        <p class="text-center"> Editar <span class=" font-bold" >  Tipo de Licor:  </span></p>
+        <p class="text-center mb-5"> {{TipoLicores.idTypeDrink}} : {{TipoLicores.name}}</p>
+        
+        <div class="w-full  mx-auto bg-white shadow-lg rounded-sm border border-gray-200 mb-8">
+            <div class="py-4">
+               
+                <div class="overflow-x-auto">
+                  <form action="editarTipoLicor/" method="POST"> {% csrf_token %}
+                            <div class="flex items-center justify-center flex-co px-4">
+                                <div class=" mt-2 flex space-x-4 items-center">
+                                    <div class="w-full">
+                                        <input type="text" value="{{TipoLicores.idTypeDrink}}" placeholder="{{TipoLicores.idTypeDrink}}" id="idTxt" name="idTxt"  class="opacity-100 px-4 py-2 bg-gray-50"/>
+                                    </div>
+                                    <div class="w-full">
+                                        <input type="text" value="{{TipoLicores.name}}" placeholder="Nombre" id="nameTxt" name="nameTxt"  class="px-4 py-2 bg-gray-50" />
+                                    </div>
+                                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight px-3 hover:bg-indigo-800">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+           
+    </div>
+</section>
+
+<script>
+   
+
+    window.onload = load();
+
+    function load(){
+
+        if(document.getElementById('btnDelete')){
+            btnDelete = document.getElementById('btnDelete');
+            btnDelete.addEventListener('click', (e) => {
+                const confirmation = confirm('¿Estas seguro que deseas eliminar el curso?');
+                if(!confirmation){
+                    e.preventDefault();
+                }
+            })
+        }
+       
+    }
+
+</script>
+</body>
+</html>
