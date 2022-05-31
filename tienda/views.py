@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 from .models import Producto
 from .models import RegistroCompra
 from tiposLicores.models import TiposLicores
@@ -90,6 +92,20 @@ def productoComprarSend(request):
     productoDescontarStock.stock  = int(productoDescontarStock.stock) - 1
 
     productoDescontarStock.save() 
+
+    #ENVIAR CORREO
+
+
+
+    email = EmailMultiAlternatives(
+        'Felicidades Has comprado en nuestra app',
+        'Aplicacion de Venta de Licores, Gracias por compra en nuestra app',
+        settings.EMAIL_HOST_USER,
+        [emailSend]
+    )
+    
+    email.send()
+
 
     
 

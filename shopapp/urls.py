@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 #customApps
 from tiposLicores import views
+from  menuPrincipal.views import menuPrincipalIndex
 
 urlpatterns = [
+    path('', menuPrincipalIndex),
     path('admin/', admin.site.urls),
     path('tiposLicores/', include('tiposLicores.urls')),
     path('tienda/', include('tienda.urls')),
