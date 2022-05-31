@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="pb-10 flex items-center justify-center" style="background: #edf2f7;">
+    <section class="antialiased bg-gray-100 text-gray-600 px-2 w-full">
+    <div class="flex flex-col w-full px-8">
+        
+        <p class="text-center">  </span></p>
+        <p class="text-center my-8 text-3xl font-bold">Datos de Facturación</p>
+        
+        <div class="flex gap-8">
+            <div class="w-60">
+            
+                        <div class=" rounded-2xl border shadow p-8 hover:-translate-y-1 hover:shadow-2xl delay-75 duration-100 bg-white">
+                            <div class="w-full flex flex-col h-full">
+                        <!-- Header & Price -->
+
+                                <figure class="w-full flex justify-center">
+                                    <img src="{{productoFinal.image}}" alt="image" class="w-auto max-h-40">
+                                </figure>
+
+
+                                <p class="text-xl text-gray-700 font-bold mt-4 text-center underline mb-2"> {{productoFinal.title}} </p>
+                                <p class="text-sm text-gray-600 mt-2"> Disponibles:   {{productoFinal.stock}} </p>
+                                <p class="text-sm text-gray-600 border-b pb-3 border-gray-300 flex-1"> Tipo de Licor: {{productoFinal.TipoLicor.name}} </p>
+
+                                <!-- Description -->
+                                <p class="text-xs mt-2 text-gray-700 font-light  leading-4 h-max"> {{productoFinal.description}} </p>
+
+                                
+                            </div>
+                        </div>
+            </div> 
+
+            <div class="flex-1">
+                <div class=" rounded-xs border shadow p-8 hover:-translate-y-1 hover:shadow-2xl delay-75 duration-100 bg-white">
+                     
+                     <form action="/tienda/productoCompra/facturacion/" method="POST" id="registerBuy" class="w-full"> {% csrf_token %} 
+                            <div class="flex flex-col  items-center justify-center w-full">
+
+                                <div class="mt-2 flex w-full space-x-4 items-center">
+                                    <div class="w-1/2">
+                                        <p class="mb-2">Id Producto:</p>
+                                        <input  type="text" readonly value="{{productoFinal.idProduct}}" placeholder="ID Producto" id="idProductTxt" name="idProductTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300"/>
+                                    </div>
+                                    <div class="w-1/2">
+                                        <p class="mb-2">Id Usuario:</p>
+                                        <input type="text" placeholder="Id Usuario" id="idUserTxt" name="idUserTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300" />
+                                    </div>
+                                </div>
+
+                                 <div class="mt-6 flex w-full space-x-4 items-center">
+                                    <div class="w-1/2">
+                                        <input type="text"  placeholder="Nombre Completo" id="fullNameTxt" name="fullNameTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300"/>
+                                    </div>
+                                    <div class="w-1/2">
+                                       <select class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300" name="typeDocumentTxt" id="typeDocumentTxt">
+                                            {% for item in tiposLicoresList %}
+                                                <option value="{{item.idTypeDoc}}">{{item.description}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 flex w-full space-x-4 items-center">
+                                    <div class="w-1/2">
+                                        <input type="mail"  placeholder="Email" id="mailTxt" name="mailTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300"/>
+                                    </div>
+                                    <div class="w-1/2">
+                                        <input type="text" placeholder="Departamento" id="departamentTxt" name="departamentTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300" />
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 flex w-full space-x-4 items-center">
+                                    <div class="w-1/2">
+                                        <input type="text"  placeholder="Ciudad" id="cityTxt" name="cityTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300"/>
+                                    </div>
+                                    <div class="w-1/2">
+                                        <input type="text" placeholder="Telefono" id="telTxt" name="telTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300" />
+                                    </div>
+                                </div>
+
+                                
+                                <div class="mt-6 flex w-full space-x-4 items-center">
+                                    <div class="w-1/2">
+                                        <input type="text"  placeholder="Dirección" id="addressTxt" name="addressTxt"  class="w-full px-4 py-2 bg-gray-50 border-2 border-gray-300"/>
+                                    </div>
+                                     <div class="w-1/2">
+                                        <input type="text" readonly placeholder="TipoLicor" id="tipoLicorTxt" name="tipoLicorTxt"  class="w-full px-4 py-2 bg-gray-300 border-2 border-gray-300"/>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 flex w-full space-x-4 items-center">
+                                    <div class="w-full">
+                                        <p class="text-xl font-bold my-5">VALOR : {{productoFinal.value}}</p>
+                                          <input type="text" value="{{productoFinal.value}}" readonly placeholder="TipoLicor" id="valueTxt" name="valueTxt"  class="w-full px-4 py-2 bg-gray-300 border-2 border-gray-300"/>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full mt-16 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight px-3 hover:bg-indigo-800">
+                                   COMFIRMAR COMPRA
+                                </button>
+                                
+                            </div>
+                        </form>   
+                </div>
+            </div> 
+        </div>
+           
+    </div>
+</section>
+
+<script>
+   
+
+    window.onload = load();
+
+    function load(){
+
+        if(document.getElementById('btnDelete')){
+            btnDelete = document.getElementById('btnDelete');
+            btnDelete.addEventListener('click', (e) => {
+                const confirmation = confirm('¿Estas seguro que deseas eliminar el curso?');
+                if(!confirmation){
+                    e.preventDefault();
+                }
+            })
+        }
+       
+    }
+
+</script>
+</body>
+</html>
